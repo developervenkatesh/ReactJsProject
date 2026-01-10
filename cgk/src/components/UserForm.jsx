@@ -45,6 +45,8 @@ const UserForm = ({ onClose }) => {
           onChange={handleChange}
           required
         />
+      </div>
+      <div className="row">
         <input
           type="email"
           name="email"
@@ -52,9 +54,6 @@ const UserForm = ({ onClose }) => {
           onChange={handleChange}
           required
         />
-      </div>
-
-      <div className="row">
         <input
           type="password"
           name="password"
@@ -62,6 +61,9 @@ const UserForm = ({ onClose }) => {
           onChange={handleChange}
           required
         />
+      </div>
+
+      <div className="row">
         <input
           name="phone_number"
           placeholder="Phone Number"
@@ -93,6 +95,7 @@ const UserForm = ({ onClose }) => {
 
       <div className="file-upload">
         <input
+          className="fileUploadInput"
           type="file"
           name="cv"
           accept=".pdf,.doc,.docx"

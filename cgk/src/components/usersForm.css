@@ -60,6 +60,18 @@ textarea {
   border-radius: 12px;
   background: #f9fafb;
   margin-bottom: 18px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  display: flex;
+}
+
+.fileUploadInput {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 70px;
+  position: relative;
 }
 
 /* actions */
