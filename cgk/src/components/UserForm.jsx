@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import "./usersForm.css";
 
 const UserForm = ({ onClose }) => {
@@ -11,21 +12,39 @@ const UserForm = ({ onClose }) => {
     gender: "",
     experience: "",
     user_summary: "",
-    cv: null,
   });
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: files ? files[0] : value,
+      [name]: value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    onClose();
+
+    try {
+      const response = await fetch("http://localhost:8000/users/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        alert(result.msg || "User added successfully");
+        onClose();
+      } else {
+        alert(result.msg || "Failed to add user");
+      }
+      onClose();
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -58,7 +77,9 @@ const UserForm = ({ onClose }) => {
           type="password"
           name="password"
           placeholder="Password"
+          value={formData.password}
           onChange={handleChange}
+          autoComplete="new-password"
           required
         />
       </div>
